@@ -6,6 +6,10 @@ function e($value): string {
 }
 
 function redirect(string $url): never {
+    // Все внутренние адреса, начинающиеся с /, дополняем адресом папки проекта.
+    if (str_starts_with($url, '/') && !str_starts_with($url, '//')) {
+        $url = BASE_URL . $url;
+    }
     header('Location: ' . $url);
     exit;
 }
